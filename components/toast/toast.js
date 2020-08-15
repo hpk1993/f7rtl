@@ -34,7 +34,7 @@ export default {
       position: 'bottom',
       closeButton: false,
       closeButtonColor: null,
-      closeButtonText: 'Ok',
+      closeButtonText: 'تایید',
       closeTimeout: null,
       cssClass: null,
       render: null,
