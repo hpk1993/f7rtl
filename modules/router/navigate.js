@@ -187,6 +187,8 @@ function forward(el, forwardOptions = {}) {
       .removeClass('navbar-previous navbar-current navbar-next')
       .addClass(`navbar-${newPagePosition}${isMaster ? ' navbar-master' : ''}${isDetail ? ' navbar-master-detail' : ''}${isDetailRoot ? ' navbar-master-detail-root' : ''}`)
       .removeClass('stacked');
+    $newNavbarEl.trigger('navbar:position', { position: newPagePosition });
+    router.emit('navbarPosition', $newNavbarEl[0], newPagePosition);
     if (isMaster || isDetail) {
       router.emit('navbarRole', $newNavbarEl[0], { role: isMaster ? 'master' : 'detail', detailRoot: !!isDetailRoot });
     }
@@ -669,6 +671,7 @@ function navigate(navigateParams, navigateOptions = {}) {
   let url;
   let createRoute;
   let name;
+  let path;
   let query;
   let params;
   let route;
@@ -678,11 +681,12 @@ function navigate(navigateParams, navigateOptions = {}) {
     url = navigateParams.url;
     createRoute = navigateParams.route;
     name = navigateParams.name;
+    path = navigateParams.path;
     query = navigateParams.query;
     params = navigateParams.params;
   }
-  if (name) {
-    url = router.generateUrl({ name, params, query });
+  if (name || path) {
+    url = router.generateUrl({ path, name, params, query });
     if (url) {
       return router.navigate(url, navigateOptions);
     }
@@ -820,7 +824,7 @@ function navigate(navigateParams, navigateOptions = {}) {
       }
     }
     if (preloadMaster || (masterLoaded && navigateOptions.reloadAll)) {
-      router.navigate(route.route.masterRoute.path, {
+      router.navigate({ path: route.route.masterRoute.path, params: route.params || {} }, {
         animate: false,
         reloadAll: navigateOptions.reloadAll,
         reloadCurrent: navigateOptions.reloadCurrent,

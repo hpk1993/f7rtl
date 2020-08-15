@@ -133,7 +133,9 @@ export namespace Router {
     /** route params. If we have matching route with `/page/user/:userId/post/:postId/` path and url of the page is `/page/user/55/post/12/` then it will be the following object `{userId: '55', postId: '12'}` */
     params?: { [ routeParameter : string ] : number | string | undefined }
     /** route name */
-    name : string
+    name?: string
+    /** route path */
+    path?: string
   }
   interface Route {
     /** route URL */
@@ -281,6 +283,11 @@ export namespace Router {
     /** Event will be triggered right before Page will be removed from DOM. This event could be very useful if you need to detach some events / destroy some plugins to free memory. As an argument event receives Page Data */
     pageBeforeRemove(page: Page): void
 
+    /** Event will be triggered on page's parent View-Tab show */
+    pageTabShow(pageEl: HTMLElement): void
+    /** Event will be triggered on page's parent View-Tab hide */
+    pageTabHide(pageEl: HTMLElement): void
+
     /** Event will be triggered right after routable Tab content will be loaded */
     tabInit(newTabEl: HTMLElement, tabRoute: Route): void
     /** Event will be triggered right after routable Tab content will be loaded */
@@ -322,6 +329,10 @@ export namespace Router {
     'page:afterout': () => void
     /** Event will be triggered right before Page will be removed from DOM. This event could be very useful if you need to detach some events / destroy some plugins to free memory */
     'page:beforeremove': () => void
+    /** Event will be triggered on page's parent View-Tab show */
+    'page:tabshow': () => void
+    /** Event will be triggered on page's parent View-Tab hide */
+    'page:tabhide': () => void
   }
 
   interface AppMethods {

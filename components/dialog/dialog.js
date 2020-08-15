@@ -7,12 +7,12 @@ export default {
   params: {
     dialog: {
       title: undefined,
-      buttonOk: 'تایید',
-      buttonCancel: 'انصراف',
-      usernamePlaceholder: 'نام کاربری',
-      passwordPlaceholder: 'گذرواژه',
-      preloaderTitle: 'در حال بارگذاری... ',
-      progressTitle: 'در حال بارگذاری... ',
+      buttonOk: 'OK',
+      buttonCancel: 'Cancel',
+      usernamePlaceholder: 'Username',
+      passwordPlaceholder: 'Password',
+      preloaderTitle: 'Loading... ',
+      progressTitle: 'Loading... ',
       backdrop: true,
       closeByBackdropClick: false,
       destroyPredefinedDialogs: true,

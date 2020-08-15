@@ -115,6 +115,8 @@ function backward(el, backwardOptions) {
       .addClass(`navbar-previous${isMaster ? ' navbar-master' : ''}${isDetail ? ' navbar-master-detail' : ''}${isDetailRoot ? ' navbar-master-detail-root' : ''}`)
       .removeClass('stacked')
       .removeAttr('aria-hidden');
+    $newNavbarEl.trigger('navbar:position', { position: 'previous' });
+    router.emit('navbarPosition', $newNavbarEl[0], 'previous');
     if (isMaster || isDetailRoot) {
       router.emit('navbarRole', $newNavbarEl[0], { role: isMaster ? 'master' : 'detail', detailRoot: !!isDetailRoot });
     }
@@ -561,7 +563,11 @@ function back(...args) {
     if (modalToClose && modalToClose.$el) {
       const prevOpenedModals = modalToClose.$el.prevAll('.modal-in');
       if (prevOpenedModals.length && prevOpenedModals[0].f7Modal) {
-        previousRoute = prevOpenedModals[0].f7Modal.route;
+        const modalEl = prevOpenedModals[0];
+        // check if current router not inside of the modalEl
+        if (!router.$el.parents(modalEl).length) {
+          previousRoute = modalEl.f7Modal.route;
+        }
       }
     }
     if (!previousRoute) {
@@ -615,11 +621,16 @@ function back(...args) {
 
   let skipMaster;
   if (router.params.masterDetailBreakpoint > 0) {
+    const classes = [];
+    router.$el.children('.page').each((index, pageEl) => {
+      classes.push(pageEl.className);
+    });
+
     const $previousMaster = router.$el.children('.page-current').prevAll('.page-master').eq(0);
     if ($previousMaster.length) {
       const expectedPreviousPageUrl = router.history[router.history.length - 2];
       const expectedPreviousPageRoute = router.findMatchingRoute(expectedPreviousPageUrl);
-      if (expectedPreviousPageRoute && expectedPreviousPageRoute.route === $previousMaster[0].f7Page.route.route) {
+      if (expectedPreviousPageRoute && $previousMaster[0].f7Page && expectedPreviousPageRoute.route === $previousMaster[0].f7Page.route.route) {
         $previousPage = $previousMaster;
         if (!navigateOptions.preload) {
           skipMaster = app.width >= router.params.masterDetailBreakpoint;
@@ -627,6 +638,7 @@ function back(...args) {
       }
     }
   }
+
   if (!navigateOptions.force && $previousPage.length && !skipMaster) {
     if (router.params.pushState
       && $previousPage[0].f7Page
