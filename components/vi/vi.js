@@ -10,7 +10,7 @@ export default {
       enabled: false,
       autoplay: true,
       fallbackOverlay: true,
-      fallbackOverlayText: 'Please watch this ad',
+      fallbackOverlayText: 'لطفا این تبلیغات را ببینید',
       showMute: true,
       startMuted: (Device.ios || Device.android) && !Device.cordova,
       appId: null,

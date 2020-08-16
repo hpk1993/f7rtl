@@ -47,7 +47,7 @@ export default {
       scrollToInput: true,
       scrollToEl: undefined,
       toolbar: true,
-      toolbarCloseText: 'Done',
+      toolbarCloseText: 'قبول',
       cssClass: null,
       routableModals: true,
       view: null,

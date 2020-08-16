@@ -28,11 +28,11 @@ export default {
       textProperty: 'text',
 
       openIn: 'page', // or 'popup' or 'dropdown'
-      pageBackLinkText: 'Back',
-      popupCloseLinkText: 'Close',
+      pageBackLinkText: 'بازگشت',
+      popupCloseLinkText: 'بستن',
       pageTitle: undefined,
-      searchbarPlaceholder: 'Search...',
-      searchbarDisableText: 'Cancel',
+      searchbarPlaceholder: 'جستجو...',
+      searchbarDisableText: 'انصراف',
       searchbarDisableButton: undefined,
 
       popupPush: false,
@@ -42,7 +42,7 @@ export default {
 
       autoFocus: false,
       closeOnSelect: false,
-      notFoundText: 'Nothing found',
+      notFoundText: 'موردی یافت نشد',
       requestSourceOnOpen: false,
 
       // Preloader

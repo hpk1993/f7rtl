@@ -35,7 +35,7 @@ export default {
       horizontalPosition: 'left',
       closeButton: false,
       closeButtonColor: null,
-      closeButtonText: 'Ok',
+      closeButtonText: 'بسیار خب',
       closeTimeout: null,
       cssClass: null,
       render: null,

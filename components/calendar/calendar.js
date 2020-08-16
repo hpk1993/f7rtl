@@ -26,18 +26,26 @@ export default {
   params: {
     calendar: {
       // Calendar settings
-      dateFormat: undefined,
-      monthNames: 'auto',
-      monthNamesShort: 'auto',
-      dayNames: 'auto',
-      dayNamesShort: 'auto',
-      locale: undefined,
+      calendarType: 'gregorian', // or 'jalali'
+      monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       firstDay: 1, // First day of the week, Monday
       weekendDays: [0, 6], // Sunday and Saturday
+      jalali: {
+        monthNames: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+        monthNamesShort: ['فَر', 'اُر', 'خُر', 'تیر', 'مُر', 'شَه', 'مهر', 'آب', 'آذر', 'دی', 'بَه', 'اِس'],
+        dayNames: ['یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه'],
+        dayNamesShort: ['1ش', '۲ش', '۳ش', '۴ش', '۵ش', 'ج', 'ش'],
+        firstDay: 6, // Saturday
+        weekendDays: [5], // Friday
+      },
       multiple: false,
       rangePicker: false,
       rangePickerMinDays: 1, // when calendar is used as rangePicker
       rangePickerMaxDays: 0, // when calendar is used as rangePicker, 0 means unlimited
+      dateFormat: 'yyyy-mm-dd',
       direction: 'horizontal', // or 'vertical'
       minDate: null,
       maxDate: null,
@@ -48,31 +56,22 @@ export default {
       animate: true,
       closeOnSelect: false,
       monthSelector: true,
-      monthPicker: true,
       yearSelector: true,
-      yearPicker: true,
-      yearPickerMin: undefined,
-      yearPickerMax: undefined,
-      timePicker: false,
-      timePickerFormat: { hour: 'numeric', minute: 'numeric' },
-      timePickerPlaceholder: 'Select time',
       weekHeader: true,
       value: null,
       // Common opener settings
       containerEl: null,
       openIn: 'auto', // or 'popover' or 'sheet' or 'customModal'
-      sheetPush: false,
-      sheetSwipeToClose: undefined,
       formatValue: null,
       inputEl: null,
       inputReadOnly: true,
       closeByOutsideClick: true,
       scrollToInput: true,
       header: false,
-      headerPlaceholder: 'Select date',
-      toolbar: true,
-      toolbarCloseText: 'Done',
+      headerPlaceholder: 'انتخاب تاریخ',
       footer: false,
+      toolbar: true,
+      toolbarCloseText: 'بستن',
       cssClass: null,
       routableModals: true,
       view: null,
